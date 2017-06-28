@@ -15,6 +15,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 MAX_SEARCH_RESULTS = 50
+OAUTH_CREDENTIALS = {'facebook': {'id': '1720135821333142', 'secret': '1dd652b1806d90651bc0f84ccaef5c8c'} }
 
 # email server
 MAIL_SERVER = 'smtp.googlemail.com'

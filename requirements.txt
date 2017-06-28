@@ -1,0 +1,10 @@
+Flask==0.12.2
+flask_login==0.4.0
+flask_mail==0.9.1
+flask_openid==1.2.5
+flask_sqlalchemy==2.2
+flask_whooshalchemy==0.56
+flask_wtf==0.14.2
+sqlalchemy_migrate==0.11.0
+SQLAlchemy==1.1.11
+WTForms==2.1
