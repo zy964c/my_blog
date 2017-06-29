@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <script type="text/javascript">
+<!--<script type="text/javascript">
     function set_openid(openid, pr)
     {
         u = openid.search('<username>');
@@ -15,9 +15,10 @@
         form.elements['openid'].value = openid;
     }
     </script>
+-->
     <h1>Sign In</h1>
     <form action="" method="post" name="login">
-        {{ form.hidden_tag() }}
+<!--    {{ form.hidden_tag() }}
         <p>
             Please enter your OpenID, or select one of the providers below:<br>
             {{ form.openid(size=80) }}
@@ -27,7 +28,8 @@
             |{% for pr in providers %}
                 <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
             {% endfor %}
-        </p>
+        </p>-->
+        <p><a href="{{ url_for('oauth_authorize', provider='facebook') }}">Login with Facebook</a></p>
         <p>{{ form.remember_me }} Remember Me</p>
         <p><input type="submit" value="Sign In"></p>
     </form>

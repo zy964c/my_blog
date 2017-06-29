@@ -43,32 +43,72 @@ def index(page=1):
 
 
 @app.route('/login', methods=['GET', 'POST'])
-@oid.loginhandler
+#@oid.loginhandler
 def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
-        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
+#        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
     return render_template('login.html',
                            title='Sign In',
-                           form=form,
-                           providers=app.config['OPENID_PROVIDERS'])
+                           form=form)
+#                           providers=app.config['OPENID_PROVIDERS'])
 
 
-@oid.after_login
-def after_login(resp):
-    if resp.email is None or resp.email == "":
-        flash('Invalid login. Please try again.')
+#@oid.after_login
+#def after_login(resp):
+#    if resp.email is None or resp.email == "":
+#        flash('Invalid login. Please try again.')
+#        return redirect(url_for('login'))
+#    user = User.query.filter_by(email=resp.email).first()
+#    if user is None:
+#        nickname = resp.nickname
+#        if nickname is None or nickname == "":
+#            nickname = resp.email.split('@')[0]
+#        nickname = User.make_unique_nickname(nickname)
+#        user = User(nickname=nickname, email=resp.email)
+#        db.session.add(user)
+#        db.session.commit()
+#        # make the user follow him/herself
+#        db.session.add(user.follow(user))
+#        db.session.commit()
+#    remember_me = False
+#    if 'remember_me' in session:
+#        remember_me = session['remember_me']
+#        session.pop('remember_me', None)
+#    login_user(user, remember=remember_me)
+#    return redirect(request.args.get('next') or url_for('index'))
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route('/authorize/<provider>')
+def oauth_authorize(provider):
+    if not current_user.is_anonymous:
+            return redirect(url_for('login'))
+    oauth = OAuthSignIn.get_provider(provider)
+    return oauth.authorize()
+
+
+@app.route('/callback/<provider>')
+def oauth_callback(provider):
+    if not current_user.is_anonymous:
         return redirect(url_for('login'))
-    user = User.query.filter_by(email=resp.email).first()
-    if user is None:
-        nickname = resp.nickname
-        if nickname is None or nickname == "":
-            nickname = resp.email.split('@')[0]
-        nickname = User.make_unique_nickname(nickname)
-        user = User(nickname=nickname, email=resp.email)
+    oauth = OAuthSignIn.get_provider(provider)
+    social_id, username, email = oauth.callback()
+    if social_id is None:
+        flash('Authentication failed.')
+        return redirect(url_for('login'))
+    user = User.query.filter_by(social_id=social_id).first()
+    if not user:
+#    if user is None:
+        nickname = User.make_unique_nickname(username)
+        user = User(social_id=social_id, nickname=nickname, email=email)
         db.session.add(user)
         db.session.commit()
         # make the user follow him/herself
@@ -81,37 +121,6 @@ def after_login(resp):
     login_user(user, remember=remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
-
-@app.route('/authorize/<provider>')
-def oauth_authorize(provider):
-    if not current_user.is_anonymous:
-            return redirect(url_for('index'))
-    oauth = OAuthSignIn.get_provider(provider)
-    return oauth.authorize()
-
-
-@app.route('/callback/<provider>')
-def oauth_callback(provider):
-    if not current_user.is_anonymous:
-        return redirect(url_for('index'))
-    oauth = OAuthSignIn.get_provider(provider)
-    social_id, username, email = oauth.callback()
-    if social_id is None:
-        flash('Authentication failed.')
-        return redirect(url_for('index'))
-    user = User.query.filter_by(social_id=social_id).first()
-    if not user:
-        user = User(social_id=social_id, nickname=username, email=email)
-        db.session.add(user)
-        db.session.commit()
-    login_user(user, True)
-    return redirect(url_for('index'))
-                                                                                                        
 @app.route('/user/<nickname>')
 @app.route('/user/<nickname>/<int:page>')
 @login_required
