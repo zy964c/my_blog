@@ -31,4 +31,4 @@ MAIL_PASSWORD = 'Bvcxz123'
 ADMINS = ['zy964c@gmail.com']
 
 # pagination
-POSTS_PER_PAGE = 10
+POSTS_PER_PAGE = 5

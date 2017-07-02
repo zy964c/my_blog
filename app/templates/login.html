@@ -2,35 +2,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!--<script type="text/javascript">
-    function set_openid(openid, pr)
-    {
-        u = openid.search('<username>');
-        if (u != -1) {
-            // openid requires username
-            user = prompt('Enter your ' + pr + ' username:');
-            openid = openid.substr(0, u) + user;
-        }
-        form = document.forms['login'];
-        form.elements['openid'].value = openid;
-    }
-    </script>
--->
-    <h1>Sign In</h1>
-    <form action="" method="post" name="login">
-<!--    {{ form.hidden_tag() }}
-        <p>
-            Please enter your OpenID, or select one of the providers below:<br>
-            {{ form.openid(size=80) }}
-            {% for error in form.openid.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}<br>
-            |{% for pr in providers %}
-                <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
-            {% endfor %}
-        </p>-->
-        <p><a href="{{ url_for('oauth_authorize', provider='facebook') }}">Login with Facebook</a></p>
-        <p>{{ form.remember_me }} Remember Me</p>
-<!--    <p><input type="submit" value="Sign In"></p> -->
+  {% include 'flash.html' %}
+  <div class="well">
+    <h3>{{ ('Please Sign In') }}</h3>
+    <form class="form" action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+        <a class="btn btn-block btn-social btn-facebook" href="{{ url_for('oauth_authorize', provider='facebook') }}">
+        <span class="fa fa-facebook"></span>Login with Facebook</a>
+        <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox" for="remember_me">
+                        {{ form.remember_me }} {{ ('Remember Me') }}
+                    </label>
+                </div>
+        </div>
+
     </form>
+  </div>
 {% endblock %}
