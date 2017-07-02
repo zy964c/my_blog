@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/static/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if title %}
     <title>{{ title }} - microblog</title>
     {% else %}
@@ -20,7 +19,7 @@
   </head>
   <body>
     <div class="container">
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="navbar-header">
                 <a class="navbar-brand">Microblog:</a>
             </div>
@@ -29,30 +28,27 @@
                 {% if g.user.is_authenticated %}
                   <li><a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a></li>
                   <li>
-                     <form class="navbar-search pull-right" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, placeholder='Search', class="search-query")}}</form>
-         <!--              <div class="form-group">
-                         <button type="submit" class="btn btn-default">Search</button>
-                       </div>
-                     </form> -->
+                     <form class="navbar-form navbar-left" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, placeholder='Search', class="search-query")}}</form>
                   </li>
                   <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}
             </ul>
         </nav>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-    {% for message in messages %}
-        <li>{{ message }} </li>
-    {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <div class="row">
-        <div class="span12">
-            {% block content %}{% endblock %}
-        </div>
+      <hr>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+      {% for message in messages %}
+          <li>{{ message }} </li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      <div class="row">
+          <div class="span12">
+              {% block content %}{% endblock %}
+          </div>
+      </div>
     </div>
   </body>
 </html>

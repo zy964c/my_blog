@@ -8,7 +8,7 @@
       <table>
           <tr>
               <td>Say something:</td>
-              <td>{{ form.post(size=30, maxlength=140) }}</td>
+              <td>{{ form.post(size=30, maxlength=240) }}</td>
               <td>
               {% for error in form.post.errors %}
               <span style="color: red;">[{{ error }}]</span><br>
