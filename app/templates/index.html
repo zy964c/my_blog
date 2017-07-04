@@ -9,18 +9,19 @@
           <div class="control-group">
                   <label class="control-label" for="post">Say something:</label>
                   <div class="controls">
-                    {{ form.post(size=30, maxlength=140) }}
+                    {{ form.post(size=80, maxlength=160) }}
                     {% for error in form.post.errors %}
                         <span class="help-inline">[{{ error }}]</span><br>
                     {% endfor %}
                   </div>
           </div>
+          <br>
           <div class="control-group">
                 <div class="controls">
                   <input class="btn btn-primary" type="submit" value="Post!">
                 </div>
           </div>
-          
+
       </form>
   </div>
   <!-- posts is a Paginate object-->

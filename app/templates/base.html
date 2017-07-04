@@ -29,23 +29,15 @@
                 <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
                 {% if g.user.is_authenticated %}
                   <li><a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a></li>
+                  <!-- search is not working yet
                   <li>
                      <form class="navbar-form navbar-left" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, placeholder='Search', class="search-query")}}</form>
                   </li>
+                  -->
                   <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}
             </ul>
         </nav>
-      <!--<hr>
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      <ul>
-      {% for message in messages %}
-          <li>{{ message }} </li>
-      {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}-->
         <div class="row">
             <div class="span12">
                 {% block content %}{% endblock %}
