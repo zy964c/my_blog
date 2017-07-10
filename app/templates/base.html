@@ -9,8 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/moment.js"></script>
     {% if title %}
-    <title>{{ title }} - microblog</title>
+    <title>{{ title }} - my blog</title>
     {% else %}
     <title>microblog</title>
     {% endif %}
@@ -23,7 +24,7 @@
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand">Microblog:</a>
+                <a class="navbar-brand">My Blog:</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
