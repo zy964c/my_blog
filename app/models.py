@@ -1,6 +1,7 @@
 from hashlib import md5
 from app import db
 from app import app
+import re
 
 import sys
 if sys.version_info >= (3, 0):
@@ -41,6 +42,10 @@ class User(db.Model):
     @property
     def is_anonymous(self):
         return False
+
+    @staticmethod
+    def make_valid_nickname(nickname):
+        return re.sub('[^a-zA-Z0-9_\.]', '', nickname)
 
     @staticmethod
     def make_unique_nickname(nickname):

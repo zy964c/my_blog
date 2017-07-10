@@ -27,15 +27,15 @@
                 <a class="navbar-brand">My Blog:</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="active"><a href="{{ url_for('index') }}">{{ _('Home') }}</a></li>
                 {% if g.user.is_authenticated %}
-                  <li><a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a></li>
+                  <li><a href="{{ url_for('user', nickname=g.user.nickname) }}">{{ _('Your Profile') }}</a></li>
                   <!-- search is not working yet
                   <li>
                      <form class="navbar-form navbar-left" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, placeholder='Search', class="search-query")}}</form>
                   </li>
                   -->
-                  <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                  <li><a href="{{ url_for('logout') }}">{{ _('Logout') }}</a></li>
                 {% endif %}
             </ul>
         </nav>
