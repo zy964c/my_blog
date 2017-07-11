@@ -8,128 +8,130 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2017-07-10 23:57+0300\n"
-"PO-Revision-Date: 2017-07-11 00:01+0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ru\n"
-"Language-Team: ru <LL@li.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"PO-Revision-Date: 2017-07-11 17:28+0300\n"
+"Language-Team: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Language: ru_RU\n"
 
 #: my_blog/app/forms.py:26
 msgid ""
-"This nickname has invalid characters. Please use letters, numbers, dots "
-"and underscores only."
+"This nickname has invalid characters. Please use letters, numbers, dots and "
+"underscores only."
 msgstr ""
+"Ваше имя содержит неразрешённые символы. Пожалуйста, используйте только "
+"буквы, числа, точки и нижнее подчёркивание."
 
 #: my_blog/app/views.py:36
 msgid "Your post is now live!"
-msgstr ""
+msgstr "Ваш пост опубликован!"
 
 #: my_blog/app/views.py:77
 msgid "Authentication failed."
-msgstr ""
+msgstr "Ошибка аутентификации."
 
 #: my_blog/app/views.py:102 my_blog/app/views.py:140 my_blog/app/views.py:160
 #, python-format
 msgid "User %(nickname)s not found."
-msgstr ""
+msgstr "Пользователь %(nickname)s не найден."
 
 #: my_blog/app/views.py:119
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Ваши изменения сохранены."
 
 #: my_blog/app/views.py:143
 msgid "You can't follow yourself!"
-msgstr ""
+msgstr "Вы не можете подписаться на самого себя!"
 
 #: my_blog/app/views.py:147
 msgid "Cannot follow ."
-msgstr ""
+msgstr "Невозможно подписаться."
 
 #: my_blog/app/views.py:151
 msgid "You are now following !"
-msgstr ""
+msgstr "Вы подписаны!"
 
 #: my_blog/app/views.py:163
 msgid "You can't unfollow yourself!"
-msgstr ""
+msgstr "Вы не можете отменить подписку на самого себя!"
 
 #: my_blog/app/views.py:167
 msgid "Cannot unfollow ."
-msgstr ""
+msgstr "Невозможно отписаться."
 
 #: my_blog/app/views.py:171
 msgid "You have stopped following ."
-msgstr ""
+msgstr "Подписка отменена."
 
 #: my_blog/app/templates/404.html:6 my_blog/app/templates/500.html:7
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: my_blog/app/templates/base.html:30
 msgid "Home"
-msgstr ""
+msgstr "Домой"
 
 #: my_blog/app/templates/base.html:32
 msgid "Your Profile"
-msgstr ""
+msgstr "Ваш Профиль"
 
 #: my_blog/app/templates/base.html:38
 msgid "Logout"
-msgstr ""
+msgstr "Выйти"
 
 #: my_blog/app/templates/edit.html:5
 msgid "Edit Your Profile"
-msgstr ""
+msgstr "Редактировать Профиль"
 
 #: my_blog/app/templates/edit.html:11
 msgid "Your nickname:"
-msgstr ""
+msgstr "Ваше имя:"
 
 #: my_blog/app/templates/edit.html:20
 msgid "About yourself:"
-msgstr ""
+msgstr "Расскажите о себе:"
 
 #: my_blog/app/templates/follower_email.html:2
 msgid "is now a follower."
-msgstr ""
+msgstr "подписан."
 
 #: my_blog/app/templates/index.html:10
 msgid "Say something:"
-msgstr ""
+msgstr "Скажите что-нибудь:"
 
 #: my_blog/app/templates/index.html:34 my_blog/app/templates/index.html:36
 #: my_blog/app/templates/user.html:31 my_blog/app/templates/user.html:33
 msgid "Newer posts"
-msgstr ""
+msgstr "Новые посты"
 
 #: my_blog/app/templates/index.html:39 my_blog/app/templates/index.html:41
 #: my_blog/app/templates/user.html:36 my_blog/app/templates/user.html:38
 msgid "Older posts"
-msgstr ""
+msgstr "Старые посты"
 
 #: my_blog/app/templates/login.html:11
 msgid "Please Sign In:"
-msgstr ""
+msgstr "Войти:"
 
 #: my_blog/app/templates/post.html:6
 #, python-format
 msgid "%(nickname)s said %(when)s:"
-msgstr ""
+msgstr "%(nickname)s сказал %(when)s:"
 
 #: my_blog/app/templates/user.html:17
 msgid "Edit your profile"
-msgstr ""
+msgstr "Редактировать профиль"
 
 #: my_blog/app/templates/user.html:19
 msgid "Follow"
-msgstr ""
+msgstr "Подписаться"
 
 #: my_blog/app/templates/user.html:21
 msgid "Unfollow"
-msgstr ""
-
+msgstr "Отменить подписку"

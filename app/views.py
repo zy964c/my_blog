@@ -7,6 +7,7 @@ from .models import User, Post
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES
 from .emails import follower_notification
 from app.oauth import OAuthSignIn
+from flask_babel import gettext
 
 @lm.user_loader
 def load_user(id):
@@ -78,8 +79,8 @@ def oauth_callback(provider):
         return redirect(url_for('login'))
     user = User.query.filter_by(social_id=social_id).first()
     if not user:
-    	nickname = User.make_valid_nickname(nickname)
-        nickname = User.make_unique_nickname(username)
+        nickname = User.make_valid_nickname(username)
+        nickname = User.make_unique_nickname(nickname)
         user = User(social_id=social_id, nickname=nickname, email=email)
         db.session.add(user)
         db.session.commit()
