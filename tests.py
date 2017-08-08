@@ -1,4 +1,4 @@
-#!flask/bin/python
+#!../flasky2/bin/python
 import os
 import unittest
 
@@ -6,6 +6,7 @@ from config import basedir
 from app import app, db
 from datetime import datetime, timedelta
 from app.models import User, Post
+from app.translate import yandex_translate
 
 class TestCase(unittest.TestCase):
     def setUp(self):
@@ -110,6 +111,10 @@ class TestCase(unittest.TestCase):
         assert f2 == [p3, p2]
         assert f3 == [p4, p3]
         assert f4 == [p4]
+
+    def test_translation(self):
+        assert yandex_translate('English', 'en', 'es') == 'Inglés'
+        assert yandex_translate('Español', 'es', 'en') == 'Spanish'
 
 if __name__ == '__main__':
     unittest.main()

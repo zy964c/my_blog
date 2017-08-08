@@ -4,6 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 CSRF_ENABLED = True
 SECRET_KEY = 'you-will-never-guess'
+TRANSLATE_API_KEY = 'trnsl.1.1.20170808T170001Z.5951de3f4cdf4c89.6ed2a4c048e8468d7d712f6a0f5ac3bfb55011e4'
 
 # available languages
 LANGUAGES = {

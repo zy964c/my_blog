@@ -8,6 +8,9 @@ from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES
 from .emails import follower_notification
 from app.oauth import OAuthSignIn
 from flask_babel import gettext
+from guess_language import guessLanguage
+from flask import jsonify
+from .translate import yandex_translate
 
 @lm.user_loader
 def load_user(id):
@@ -22,6 +25,7 @@ def before_request():
         db.session.add(g.user)
         db.session.commit()
         g.search_form = SearchForm()
+    g.locale = get_locale()
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -31,14 +35,17 @@ def before_request():
 def index(page=1):
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user)
+        language = guessLanguage(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user, language=language)
         db.session.add(post)
         db.session.commit()
         flash(gettext('Your post is now live!'))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     return render_template('index.html',
-                           title='Home',
+                           title=(gettext('Home')),
                            form=form,
                            posts=posts)
 
@@ -51,7 +58,7 @@ def login():
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
     return render_template('login.html',
-                           title='Sign In',
+                           title=(gettext('Sign In')),
                            form=form)
 
 
@@ -189,6 +196,16 @@ def search_results(query):
                            query=query,
                            results=results)
 
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate():
+    return jsonify({ 
+        'text': yandex_translate(
+            request.form['text'], 
+            request.form['sourceLang'], 
+            request.form['destLang']) })
+
 @babel.localeselector
 def get_locale():
+    print (str(request.accept_languages.best_match(LANGUAGES.keys())))
     return request.accept_languages.best_match(LANGUAGES.keys())

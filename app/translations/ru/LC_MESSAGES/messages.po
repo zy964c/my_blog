@@ -7,131 +7,292 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-07-10 23:57+0300\n"
-"PO-Revision-Date: 2017-07-11 17:28+0300\n"
+"POT-Creation-Date: 2017-08-08 21:26+0300\n"
+"PO-Revision-Date: 2017-08-08 21:27+0300\n"
+"Last-Translator: \n"
+"Language: ru_RU\n"
 "Language-Team: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Language: ru_RU\n"
 
-#: my_blog/app/forms.py:26
-msgid ""
-"This nickname has invalid characters. Please use letters, numbers, dots and "
-"underscores only."
-msgstr ""
-"Ваше имя содержит неразрешённые символы. Пожалуйста, используйте только "
-"буквы, числа, точки и нижнее подчёркивание."
+#: app/__init__.py:18
+msgid "Please log in to access this page."
+msgstr "Пожалуйста, войдите, что бы открыть страницу"
 
-#: my_blog/app/views.py:36
+#: app/forms.py:27
+msgid "This nickname has invalid characters. Please use letters, numbers, dots and underscores only."
+msgstr "Ваше имя содержит неразрешённые символы. Пожалуйста, используйте только буквы, числа, точки и нижнее подчёркивание."
+
+#: app/views.py:44
 msgid "Your post is now live!"
 msgstr "Ваш пост опубликован!"
 
-#: my_blog/app/views.py:77
+#: app/templates/base.html:52 app/views.py:48
+msgid "Home"
+msgstr "Домой"
+
+#: app/views.py:61
+msgid "Sign In"
+msgstr "Войти:"
+
+#: app/views.py:85
 msgid "Authentication failed."
 msgstr "Ошибка аутентификации."
 
-#: my_blog/app/views.py:102 my_blog/app/views.py:140 my_blog/app/views.py:160
+#: app/views.py:110 app/views.py:148 app/views.py:168
 #, python-format
 msgid "User %(nickname)s not found."
 msgstr "Пользователь %(nickname)s не найден."
 
-#: my_blog/app/views.py:119
+#: app/views.py:127
 msgid "Your changes have been saved."
 msgstr "Ваши изменения сохранены."
 
-#: my_blog/app/views.py:143
+#: app/views.py:151
 msgid "You can't follow yourself!"
 msgstr "Вы не можете подписаться на самого себя!"
 
-#: my_blog/app/views.py:147
+#: app/views.py:155
 msgid "Cannot follow ."
 msgstr "Невозможно подписаться."
 
-#: my_blog/app/views.py:151
+#: app/views.py:159
 msgid "You are now following !"
 msgstr "Вы подписаны!"
 
-#: my_blog/app/views.py:163
+#: app/views.py:171
 msgid "You can't unfollow yourself!"
 msgstr "Вы не можете отменить подписку на самого себя!"
 
-#: my_blog/app/views.py:167
+#: app/views.py:175
 msgid "Cannot unfollow ."
 msgstr "Невозможно отписаться."
 
-#: my_blog/app/views.py:171
+#: app/views.py:179
 msgid "You have stopped following ."
 msgstr "Подписка отменена."
 
-#: my_blog/app/templates/404.html:6 my_blog/app/templates/500.html:7
+#: app/templates/404.html:6 app/templates/500.html:7
 msgid "Back"
 msgstr "Назад"
 
-#: my_blog/app/templates/base.html:30
-msgid "Home"
-msgstr "Домой"
+#: app/templates/base.html:29
+msgid "Error: Could not contact server."
+msgstr "Ошибка: Нет связи с сервером."
 
-#: my_blog/app/templates/base.html:32
+#: app/templates/base.html:36 app/templates/base.html:38
+msgid "my blog"
+msgstr "мой блог"
+
+#: app/templates/base.html:49
+msgid "My Blog"
+msgstr "Мой Блог"
+
+#: app/templates/base.html:54
 msgid "Your Profile"
 msgstr "Ваш Профиль"
 
-#: my_blog/app/templates/base.html:38
+#: app/templates/base.html:60
 msgid "Logout"
 msgstr "Выйти"
 
-#: my_blog/app/templates/edit.html:5
+#: app/templates/edit.html:5
 msgid "Edit Your Profile"
 msgstr "Редактировать Профиль"
 
-#: my_blog/app/templates/edit.html:11
+#: app/templates/edit.html:11
 msgid "Your nickname:"
 msgstr "Ваше имя:"
 
-#: my_blog/app/templates/edit.html:20
+#: app/templates/edit.html:20
 msgid "About yourself:"
 msgstr "Расскажите о себе:"
 
-#: my_blog/app/templates/follower_email.html:2
+#: app/templates/edit.html:30
+msgid "Save Changes"
+msgstr "Сохранить Изменения"
+
+#: app/templates/follower_email.html:2
 msgid "is now a follower."
 msgstr "подписан."
 
-#: my_blog/app/templates/index.html:10
+#: app/templates/index.html:5
+msgid "Hi"
+msgstr "Привет"
+
+#: app/templates/index.html:10
 msgid "Say something:"
 msgstr "Скажите что-нибудь:"
 
-#: my_blog/app/templates/index.html:34 my_blog/app/templates/index.html:36
-#: my_blog/app/templates/user.html:31 my_blog/app/templates/user.html:33
+#: app/templates/index.html:21
+msgid "Post!"
+msgstr "Опубликовать!"
+
+#: app/templates/index.html:34 app/templates/index.html:36
+#: app/templates/user.html:31 app/templates/user.html:33
 msgid "Newer posts"
 msgstr "Новые посты"
 
-#: my_blog/app/templates/index.html:39 my_blog/app/templates/index.html:41
-#: my_blog/app/templates/user.html:36 my_blog/app/templates/user.html:38
+#: app/templates/index.html:39 app/templates/index.html:41
+#: app/templates/user.html:36 app/templates/user.html:38
 msgid "Older posts"
 msgstr "Старые посты"
 
-#: my_blog/app/templates/login.html:11
+#: app/templates/login.html:11
 msgid "Please Sign In:"
 msgstr "Войти:"
 
-#: my_blog/app/templates/post.html:6
+#: app/templates/login.html:15
+msgid "Login with Facebook"
+msgstr "Войти с помощью Facebook"
+
+#: app/templates/post.html:6
 #, python-format
 msgid "%(nickname)s said %(when)s:"
 msgstr "%(nickname)s сказал %(when)s:"
 
-#: my_blog/app/templates/user.html:17
-msgid "Edit your profile"
-msgstr "Редактировать профиль"
+#: app/templates/post.html:12
+msgid "Translate"
+msgstr "Перевести"
 
-#: my_blog/app/templates/user.html:19
+#: app/templates/user.html:13
+msgid "Last seen:"
+msgstr "Был последний раз:"
+
+#: app/templates/user.html:15
+msgid "Followers:"
+msgstr "Подписчики:"
+
+#: app/templates/user.html:15
+msgid "Following:"
+msgstr "Подписан:"
+
+#: app/templates/user.html:17
+msgid "Edit your profile"
+msgstr "Редактировать Профиль"
+
+#: app/templates/user.html:19
 msgid "Follow"
 msgstr "Подписаться"
 
-#: my_blog/app/templates/user.html:21
+#: app/templates/user.html:21
 msgid "Unfollow"
 msgstr "Отменить подписку"
+
+#~ msgid "Please log in to access this page."
+#~ msgstr " Пожалуйста, войдите, что бы открыть страницу"
+
+#~ msgid ""
+#~ "This nickname has invalid characters. "
+#~ "Please use letters, numbers, dots and"
+#~ " underscores only."
+#~ msgstr ""
+#~ "Ваше имя содержит неразрешённые символы. "
+#~ "Пожалуйста, используйте только буквы, числа,"
+#~ " точки и нижнее подчёркивание."
+
+#~ msgid "Your post is now live!"
+#~ msgstr "Ваш пост опубликован!"
+
+#~ msgid "Authentication failed."
+#~ msgstr "Ошибка аутентификации."
+
+#~ msgid "User %(nickname)s not found."
+#~ msgstr "Пользователь %(nickname)s не найден."
+
+#~ msgid "Your changes have been saved."
+#~ msgstr "Ваши изменения сохранены."
+
+#~ msgid "You can't follow yourself!"
+#~ msgstr "Вы не можете подписаться на самого себя!"
+
+#~ msgid "Cannot follow ."
+#~ msgstr "Невозможно подписаться."
+
+#~ msgid "You are now following !"
+#~ msgstr "Вы подписаны!"
+
+#~ msgid "You can't unfollow yourself!"
+#~ msgstr "Вы не можете отменить подписку на самого себя!"
+
+#~ msgid "Cannot unfollow ."
+#~ msgstr "Невозможно отписаться."
+
+#~ msgid "You have stopped following ."
+#~ msgstr "Подписка отменена."
+
+#~ msgid "Back"
+#~ msgstr "Назад"
+
+#~ msgid "my blog"
+#~ msgstr "мой блог"
+
+#~ msgid "My Blog"
+#~ msgstr "Мой Блог"
+
+#~ msgid "Home"
+#~ msgstr "Домой"
+
+#~ msgid "Your Profile"
+#~ msgstr "Ваш Профиль"
+
+#~ msgid "Logout"
+#~ msgstr "Выйти"
+
+#~ msgid "Edit Your Profile"
+#~ msgstr "Редактировать Профиль"
+
+#~ msgid "Your nickname:"
+#~ msgstr "Ваше имя:"
+
+#~ msgid "About yourself:"
+#~ msgstr "Расскажите о себе:"
+
+#~ msgid "Save Changes"
+#~ msgstr "Сохранить Изменения"
+
+#~ msgid "is now a follower."
+#~ msgstr "подписан."
+
+#~ msgid "Say something:"
+#~ msgstr "Скажите что-нибудь:"
+
+#~ msgid "Post!"
+#~ msgstr "Опубликовать!"
+
+#~ msgid "Newer posts"
+#~ msgstr "Новые посты"
+
+#~ msgid "Older posts"
+#~ msgstr "Старые посты"
+
+#~ msgid "Please Sign In:"
+#~ msgstr "Войти:"
+
+#~ msgid "Login with Facebook"
+#~ msgstr "Войти с помощью Facebook"
+
+#~ msgid "%(nickname)s said %(when)s:"
+#~ msgstr "%(nickname)s сказал %(when)s:"
+
+#~ msgid "Last seen:"
+#~ msgstr "Был последний раз:"
+
+#~ msgid "Followers:"
+#~ msgstr "Подписчики:"
+
+#~ msgid "Following:"
+#~ msgstr "Подписан:"
+
+#~ msgid "Edit your profile"
+#~ msgstr "Редактировать профиль"
+
+#~ msgid "Follow"
+#~ msgstr "Подписаться"
+
+#~ msgid "Unfollow"
+#~ msgstr "Отменить подписку"

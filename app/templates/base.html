@@ -9,11 +9,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/static/js/bootstrap.min.js"></script>
+    {% if g.locale != 'en' %}
+    <script src="/static/js/moment-{{ g.locale }}.min.js"></script>
+    {% endif %}
     <script src="/static/js/moment.js"></script>
+    <script>
+    function translate(sourceLang, destLang, sourceId, destId, loadingId) {
+        $(destId).hide();
+        $(loadingId).show();
+        $.post('/translate', {
+            text: $(sourceId).text(),
+            sourceLang: sourceLang,
+            destLang: destLang
+        }).done(function(translated) {
+            $(destId).text(translated['text'])
+            $(loadingId).hide();
+            $(destId).show();
+        }).fail(function() {
+            $(destId).text("{{ _('Error: Could not contact server.') }}");
+            $(loadingId).hide();
+            $(destId).show();
+        });
+    }
+    </script>
     {% if title %}
-    <title>{{ title }} - my blog</title>
+    <title>{{ title }} - {{ _('my blog') }}</title>
     {% else %}
-    <title>microblog</title>
+    <title>{{ _('my blog') }}</title>
     {% endif %}
     <!-- Bootstrap -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +46,7 @@
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand">My Blog:</a>
+                <a class="navbar-brand">{{ _('My Blog') }}</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url_for('index') }}">{{ _('Home') }}</a></li>
