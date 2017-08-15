@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request, g
+from flask import render_template, flash, redirect, session, url_for, request, g, make_response
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime
 from app import app, db, lm, babel
@@ -43,11 +43,18 @@ def index(page=1):
         db.session.commit()
         flash(gettext('Your post is now live!'))
         return redirect(url_for('index'))
-    posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+    show_followed = False
+    if current_user.is_authenticated:
+        show_followed = bool(request.cookies.get('show_followed', ''))
+    if show_followed:
+        posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+    else:
+        posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
     return render_template('index.html',
                            title=(gettext('Home')),
                            form=form,
-                           posts=posts)
+                           posts=posts,
+                           show_followed=show_followed)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -109,7 +116,7 @@ def user(nickname, page=1):
     if user is None:
         flash(gettext('User %(nickname)s not found.' % nickname))
         return redirect(url_for('index'))
-    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
+    posts = user.posts.order_by(Post.timestamp.desc()).paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html',
                            user=user,
                            posts=posts)
@@ -209,3 +216,18 @@ def translate():
 def get_locale():
     print (str(request.accept_languages.best_match(LANGUAGES.keys())))
     return request.accept_languages.best_match(LANGUAGES.keys())
+
+@app.route('/all')
+@login_required
+def show_all():
+    resp = make_response(redirect(url_for('.index')))
+    resp.set_cookie('show_followed', '', max_age=30*24*60*60)
+    return resp
+
+
+@app.route('/followed')
+@login_required
+def show_followed():
+    resp = make_response(redirect(url_for('.index')))
+    resp.set_cookie('show_followed', '1', max_age=30*24*60*60)
+    return resp
