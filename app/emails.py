@@ -27,3 +27,6 @@ def follower_notification(followed, follower):
                                user=followed, follower=follower),
                render_template("follower_email.html",
                                user=followed, follower=follower))
+
+#def post_notification(follower, follower):
+#	send_email

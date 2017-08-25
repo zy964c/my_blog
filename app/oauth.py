@@ -2,6 +2,7 @@ import json
 
 from rauth import OAuth2Service
 from flask import current_app, url_for, request, redirect, session
+import requests
 
 
 class OAuthSignIn(object):
@@ -20,6 +21,9 @@ class OAuthSignIn(object):
         pass
 
     def get_callback_url(self):
+        #print(url_for('oauth_callback', provider=self.provider_name,
+        #               _external=True)
+#)
         return url_for('oauth_callback', provider=self.provider_name,
                        _external=True)
 
@@ -65,10 +69,69 @@ class FacebookSignIn(OAuthSignIn):
             decoder=decode_json
         )
         me = oauth_session.get('me?fields=id,email').json()
+        print(me)
         return (
             'facebook$' + me['id'],
             me.get('email').split('@')[0],  # Facebook does not provide
                                             # username, so the email's user
                                             # is used instead
             me.get('email')
+        )
+
+class VkSignIn(OAuthSignIn):
+    def __init__(self):
+        super(VkSignIn, self).__init__('Vk')
+        self.service = OAuth2Service(
+            name='Vk',
+            client_id=self.consumer_id,
+            client_secret=self.consumer_secret,
+            authorize_url='https://oauth.vk.com/authorize',
+            access_token_url='https://oauth.vk.com/access_token',
+            base_url='https://api.vk.com/method'
+        )
+
+    def authorize(self):
+        return redirect(self.service.get_authorize_url(
+            scope='email',
+            response_type='code',
+            redirect_uri=self.get_callback_url())
+        )
+
+    def callback(self):
+        def decode_json(payload):
+            return json.loads(payload.decode('utf-8'))
+
+        if 'code' not in request.args:
+            return None, None, None
+
+        oauth_session = self.service.get_raw_access_token(
+            data={'code': request.args['code'],
+                  'grant_type': 'authorization_code',
+                  'redirect_uri': self.get_callback_url()}
+        )
+
+        
+        answ = oauth_session.json()
+        email = answ['email']
+        access_token = answ['access_token']
+        name = email.split('@')[0]
+
+        #attributes introspection
+        a = dir(oauth_session)
+        for i in a:
+            if not '__' in i:
+                print(i)
+                try:
+                    print(eval('oauth_session2.' + i + '()'))
+                except:
+                    print(i + 'not a method')
+
+        me = requests.get('https://api.vk.com/method/users.get', params={'access_token': access_token}).json()
+        
+        print (me)
+        return (
+            me['response'][0]['uid'],
+            name,
+            #me['response'][0]['first_name'],   
+            email
         )

@@ -8,11 +8,16 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
 
           <div class="well">
-            <h3>{{ _('Please Sign In:') }}</h3>
+            <h3>
+                <p style="text-align:center">{{ _('Please Sign In:') }}</p>
+            </h3>
             <br>
             {{ form.hidden_tag() }}
             <a class="btn btn-block btn-social btn-facebook" href="{{ url_for('oauth_authorize', provider='facebook') }}">
             <span class="fa fa-facebook"></span>{{ _('Login with Facebook') }}</a>
+            <br>
+            <a class="btn btn-block btn-social btn-vk" href="{{ url_for('oauth_authorize', provider='Vk') }}">
+            <span class="fa fa-vk"></span>{{ _('Login with Vkontakte') }}</a>
           </div>
         </div>
     </div>

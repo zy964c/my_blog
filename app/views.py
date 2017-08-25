@@ -88,6 +88,7 @@ def oauth_callback(provider):
         return redirect(url_for('login'))
     oauth = OAuthSignIn.get_provider(provider)
     social_id, username, email = oauth.callback()
+    print(social_id, username, email)
     if social_id is None:
         flash(gettext('Authentication failed.'))
         return redirect(url_for('login'))

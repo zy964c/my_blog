@@ -16,7 +16,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 MAX_SEARCH_RESULTS = 50
-OAUTH_CREDENTIALS = {'facebook': {'id': '1720135821333142', 'secret': '1dd652b1806d90651bc0f84ccaef5c8c'} }
+OAUTH_CREDENTIALS = {'facebook': {'id': '1720135821333142', 'secret': '1dd652b1806d90651bc0f84ccaef5c8c'}, 'Vk': {'id': '6151748', 'secret': 'RJ5ZbjzpjOF8LV1zWg9k'} }
 
 # email server
 MAIL_SERVER = 'smtp.googlemail.com'
@@ -32,4 +32,4 @@ MAIL_PASSWORD = 'Bvcxz123'
 ADMINS = ['zy964c@gmail.com']
 
 # pagination
-POSTS_PER_PAGE = 5
+POSTS_PER_PAGE = 10
