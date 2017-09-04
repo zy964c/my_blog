@@ -19,7 +19,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
     thr = Thread(target=send_async_email, args=[app, msg])
     thr.start()
 
-def follower_notification(followed, follower):
+def follower_notification(followed, follower, post):
     send_email("[my blog] %s is now following you!" % follower.nickname,
                ADMINS[0],
                [followed.email],
@@ -28,5 +28,11 @@ def follower_notification(followed, follower):
                render_template("follower_email.html",
                                user=followed, follower=follower))
 
-#def post_notification(follower, follower):
-#	send_email
+def post_notification(followed, follower, post):
+	send_email("[my blog] %s just posted a new message!" % follower.nickname,
+               ADMINS[0],
+               [followed.email],
+               render_template("post_email.txt",
+                               user=followed, follower=follower, post=post),
+               render_template("post_email.html",
+                               user=followed, follower=follower, post=post))

@@ -5,7 +5,7 @@ from app import app, db, lm, babel
 from .forms import LoginForm, EditForm, PostForm, SearchForm
 from .models import User, Post
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS, LANGUAGES
-from .emails import follower_notification
+from .emails import follower_notification, post_notification
 from app.oauth import OAuthSignIn
 from flask_babel import gettext
 from guess_language import guessLanguage
@@ -42,6 +42,11 @@ def index(page=1):
         db.session.add(post)
         db.session.commit()
         flash(gettext('Your post is now live!'))
+        frs = g.user.followers.all()
+        print(frs)
+        for user in frs:
+            if g.user.id != user.id:
+                post_notification(user, g.user, post)
         return redirect(url_for('index'))
     show_followed = False
     if current_user.is_authenticated:
@@ -232,3 +237,18 @@ def show_followed():
     resp = make_response(redirect(url_for('.index')))
     resp.set_cookie('show_followed', '1', max_age=30*24*60*60)
     return resp
+
+@app.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    post = Post.query.get(id)
+    if post is None:
+        flash('Post not found.')
+        return redirect(url_for('index'))
+    if post.author.id != g.user.id:
+        flash('You cannot delete this post.')
+        return redirect(url_for('index'))
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted.')
+    return redirect(url_for('index'))
