@@ -1,6 +1,10 @@
-#!../flasky2/bin/python
+#!./flask_env/bin/python3
 import os
 import unittest
+from coverage import coverage
+
+cov = coverage(branch=True, omit=['flask_env/*', 'tests.py'])
+cov.start()
 
 from config import basedir
 from app import app, db
@@ -30,6 +34,8 @@ class TestCase(unittest.TestCase):
         u = User(nickname='john', email='john@example.com')
         db.session.add(u)
         db.session.commit()
+        nickname = User.make_unique_nickname('susan')
+        assert nickname == 'susan'
         nickname = User.make_unique_nickname('john')
         assert nickname != 'john'
         u = User(nickname=nickname, email='susan@example.com')
@@ -116,5 +122,31 @@ class TestCase(unittest.TestCase):
         assert yandex_translate('English', 'en', 'es') == 'Inglés'
         assert yandex_translate('Español', 'es', 'en') == 'Spanish'
 
+    def test_user(self):
+        # make valid nicknames
+        n = User.make_valid_nickname('John_123')
+        assert n == 'John_123'
+        n = User.make_valid_nickname('John_[123]\n')
+        assert n == 'John_123'
+        # create a user
+        u = User(nickname='john', email='john@example.com')
+        db.session.add(u)
+        db.session.commit()
+        assert u.is_authenticated is True
+        assert u.is_active is True
+        assert u.is_anonymous is False
+        assert u.id == int(u.get_id())
+
 if __name__ == '__main__':
-    unittest.main()
+
+    try:
+        unittest.main()
+    except:
+        pass
+    cov.stop()
+    cov.save()
+    print("\n\nCoverage Report:\n")
+    cov.report()
+    print("HTML version: " + os.path.join(basedir, "tmp/coverage/index.html"))
+    cov.html_report(directory='tmp/coverage')
+    cov.erase()

@@ -2,5 +2,9 @@
 *.pyo
 app.db
 search.db
-flask
+test.db
+flask_env
+.vscode/*
+.ropeproject/*
+.idea/*
 

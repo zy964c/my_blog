@@ -17,6 +17,9 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 MAX_SEARCH_RESULTS = 50
 OAUTH_CREDENTIALS = {'facebook': {'id': '1720135821333142', 'secret': '1dd652b1806d90651bc0f84ccaef5c8c'}, 'Vk': {'id': '6151748', 'secret': 'RJ5ZbjzpjOF8LV1zWg9k'} }
+SQLALCHEMY_RECORD_QUERIES = True
+# slow database query threshold (in seconds)
+DATABASE_QUERY_TIMEOUT = 0.5
 
 # email server
 MAIL_SERVER = 'smtp.googlemail.com'
